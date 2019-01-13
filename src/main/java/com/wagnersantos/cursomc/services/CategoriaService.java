@@ -22,7 +22,7 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository repo;
 
-	public Categoria buscar(Integer id) {
+	public Categoria buscarCategoriaId(Integer id) {
 		Optional<Categoria> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjetoNaoEncontrado(
 				"Objeto não encontrado! id:" + id + ", tipo: " + Categoria.class.getName()));
@@ -34,12 +34,13 @@ public class CategoriaService {
 	}
 
 	public Categoria atualizarCategoria(Categoria obj) {
-		buscar(obj.getId());
-		return repo.save(obj);
+		Categoria newObj = buscarCategoriaId(obj.getId());
+		atualizarDados(newObj, obj);
+		return repo.save(newObj);
 	}
 
 	public void deletarCategoria(Integer id) {
-		buscar(id);
+		buscarCategoriaId(id);
 		try {
 			repo.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
@@ -47,7 +48,7 @@ public class CategoriaService {
 		}
 	}
 
-	public List<Categoria> buscarTodos() {
+	public List<Categoria> buscarTodasCategorias() {
 		List<Categoria> obj = repo.findAll();
 		return obj;
 	}
@@ -61,4 +62,8 @@ public class CategoriaService {
 		return new Categoria(objDTO.getId(), objDTO.getNome());
 	}
 	
+	private void atualizarDados(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());	
+	}
+	 
 }

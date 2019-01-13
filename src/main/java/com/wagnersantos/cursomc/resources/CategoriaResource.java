@@ -37,7 +37,7 @@ public class CategoriaResource {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 
-		Categoria obj = service.buscar(id);
+		Categoria obj = service.buscarCategoriaId(id);
 		
 		return ResponseEntity.ok().body(obj);
 	}
@@ -61,7 +61,7 @@ public class CategoriaResource {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<CategoriaDTO>> buscarTodos(){
-		List<Categoria> obj = service.buscarTodos();
+		List<Categoria> obj = service.buscarTodasCategorias();
 		List<CategoriaDTO> objDTO = obj.stream().map(objConversor -> new CategoriaDTO(objConversor)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(objDTO);
 	}
