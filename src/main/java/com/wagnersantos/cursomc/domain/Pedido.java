@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -62,6 +61,14 @@ public class Pedido implements Serializable {
 		this.id = id;
 	}
 
+	public Double getValorTotal() {
+		Double soma = 0.0;
+		for (ItemPedido ip : itens){
+			soma = soma + ip.getSubTotal();
+		}
+		return soma;
+	}
+	
 	public Date getInstante() {
 		return instante;
 	}
