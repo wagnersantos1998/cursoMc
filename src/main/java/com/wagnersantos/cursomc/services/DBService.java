@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.wagnersantos.cursomc.domain.Categoria;
 import com.wagnersantos.cursomc.domain.Cidade;
@@ -29,6 +30,7 @@ import com.wagnersantos.cursomc.repositories.PagamentoRepository;
 import com.wagnersantos.cursomc.repositories.PedidoRepository;
 import com.wagnersantos.cursomc.repositories.ProdutoRepository;
 
+@Service
 public class DBService {
 
 	@Autowired
