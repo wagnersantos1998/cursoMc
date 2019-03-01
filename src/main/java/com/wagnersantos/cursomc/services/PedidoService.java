@@ -11,7 +11,6 @@ import com.wagnersantos.cursomc.domain.ItemPedido;
 import com.wagnersantos.cursomc.domain.PagamentoComBoleto;
 import com.wagnersantos.cursomc.domain.Pedido;
 import com.wagnersantos.cursomc.domain.enums.EstadoPagamento;
-import com.wagnersantos.cursomc.repositories.ClienteRepository;
 import com.wagnersantos.cursomc.repositories.ItemPedidoRepository;
 import com.wagnersantos.cursomc.repositories.PagamentoRepository;
 import com.wagnersantos.cursomc.repositories.PedidoRepository;
@@ -36,7 +35,10 @@ public class PedidoService {
 	private ItemPedidoRepository itemPedidoRepository;
 
 	@Autowired
-	private ClienteRepository clienteRepository; 
+	private ClienteService clienteService; 
+	
+	@Autowired
+	private EmailService emailService;
 	
 	public Pedido buscar(Integer id) {
 		Optional<Pedido> objPedido = repo.findById(id);
@@ -48,7 +50,7 @@ public class PedidoService {
 	public Pedido inserirPedido(Pedido pedido) {
 		pedido.setId(null);
 		pedido.setInstante(new Date());
-		pedido.setCliente(clienteRepository.getOne(pedido.getCliente().getId()));
+		pedido.setCliente(clienteService.buscarClienteId(pedido.getCliente().getId()));
 		pedido.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		pedido.getPagamento().setPedido(pedido);
 		if (pedido.getPagamento() instanceof PagamentoComBoleto) {
@@ -64,7 +66,7 @@ public class PedidoService {
 			ip.setPedido(pedido);
 		}
 		itemPedidoRepository.saveAll(pedido.getItens());
-		System.out.println(pedido);
+		emailService.enviarConfirmacaoEmail(pedido);
 		return pedido;
 	}
 
