@@ -1,8 +1,11 @@
 package com.wagnersantos.cursomc.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -23,11 +26,10 @@ public class Pedido implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date instante;
 
-	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
 	private Pagamento pagamento;
 
@@ -63,12 +65,12 @@ public class Pedido implements Serializable {
 
 	public Double getValorTotal() {
 		Double soma = 0.0;
-		for (ItemPedido ip : itens){
+		for (ItemPedido ip : itens) {
 			soma = soma + ip.getSubTotal();
 		}
 		return soma;
 	}
-	
+
 	public Date getInstante() {
 		return instante;
 	}
@@ -132,6 +134,28 @@ public class Pedido implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		NumberFormat formatarNumero = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+		SimpleDateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		builder.append("Número do pedido: ");
+		builder.append(getId());
+		builder.append(", Data do pedido: ");
+		builder.append(formatadorData.format(getInstante()));
+		builder.append(", Cliente: ");
+		builder.append(getCliente().getNome());
+		builder.append(", Situaçao do pagamento: ");
+		builder.append(getPagamento().getEstado().getDescricao());
+		builder.append("\nDetalhes:\n");
+		for (ItemPedido ip : getItens()) {
+			builder.append(ip.toString());
+		}
+		builder.append("Valor total: ");
+		builder.append(formatarNumero.format(getValorTotal()));
+		return builder.toString();
 	}
 
 }
