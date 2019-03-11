@@ -22,7 +22,7 @@ public abstract class AbstractMailService implements EmailService {
 		SimpleMailMessage mensagemEmail = new SimpleMailMessage();
 		mensagemEmail.setTo(pedido.getCliente().getEmail());
 		mensagemEmail.setFrom(sender);
-		mensagemEmail.setSubject("Pedido confirmado! Código" + pedido.getId());
+		mensagemEmail.setSubject("Pedido confirmado! Código " + pedido.getId());
 		mensagemEmail.setSentDate(new Date(System.currentTimeMillis()));
 		mensagemEmail.setText(pedido.toString());
 		return mensagemEmail;

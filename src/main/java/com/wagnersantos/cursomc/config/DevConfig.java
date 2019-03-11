@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.wagnersantos.cursomc.services.DBService;
+import com.wagnersantos.cursomc.services.EmailService;
+import com.wagnersantos.cursomc.services.StmpEmailService;
 
 @Configuration
 @Profile("dev")
@@ -29,5 +31,10 @@ public class DevConfig {
 			dbService.inicializadorBancoDeDadosTest();
 			return true;
 		}
+	}
+	
+	@Bean
+	public EmailService emailService() {
+		return new StmpEmailService();
 	}
 }
