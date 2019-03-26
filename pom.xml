@@ -47,12 +47,18 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+<<<<<<< HEAD
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
@@ -67,6 +73,11 @@
 			<version>0.7.0</version>
 		</dependency>
 		
+=======
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+>>>>>>> 4360cf24830cf2fd53d417672651ffd7973d2c1f
 	</dependencies>
 	<build>
 		<plugins>

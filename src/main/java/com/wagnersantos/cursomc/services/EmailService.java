@@ -10,4 +10,8 @@ public interface EmailService {
 	
 	void enviarEmail(SimpleMailMessage msgm);
 	
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 4360cf24830cf2fd53d417672651ffd7973d2c1f

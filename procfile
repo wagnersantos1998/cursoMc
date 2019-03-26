@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 web: java -Dserver.port = $ PORT -Dspring.profiles.active = prod $ JAVA_OPTS -jogo -jar / cursoMc-1-0.0.1-SNAPSHOT.jar
+=======
+web: java -Dserver.port=$PORT -Dspring.profiles.active=prod $JAVA_OPTS -jar target/cursoMc-1-0.0.1-SNAPSHOT.jar
+>>>>>>> 4360cf24830cf2fd53d417672651ffd7973d2c1f
