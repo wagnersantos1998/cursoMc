@@ -20,6 +20,7 @@ import com.wagnersantos.cursomc.domain.PagamentoComCartao;
 import com.wagnersantos.cursomc.domain.Pedido;
 import com.wagnersantos.cursomc.domain.Produto;
 import com.wagnersantos.cursomc.domain.enums.EstadoPagamento;
+import com.wagnersantos.cursomc.domain.enums.Perfil;
 import com.wagnersantos.cursomc.domain.enums.TipoCliente;
 import com.wagnersantos.cursomc.repositories.CategoriaRepository;
 import com.wagnersantos.cursomc.repositories.CidadeRepository;
@@ -113,22 +114,26 @@ public class DBService {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
-<<<<<<< HEAD
-		Cliente cl1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA, pe.encode("123"));
-=======
-		Cliente cl1 = new Cliente(null, "Wagner Santos", "wagner_santos@live.com", "(44) 99908-4413", TipoCliente.PESSOAFISICA);
->>>>>>> 4360cf24830cf2fd53d417672651ffd7973d2c1f
-
+		Cliente cl1 = new Cliente(null, "Maria Silva", "aldoirpedrinho@gmail.com", "36378912377",
+				TipoCliente.PESSOAFISICA, pe.encode("123"));
 		cl1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+
+		Cliente cl2 = new Cliente(null, "Ana Teste", "wagner_santos@live.com", "36378912377", TipoCliente.PESSOAFISICA,
+				pe.encode("123"));
+		cl2.addPerfil(Perfil.ADMIN);
+		cl2.getTelefones().addAll(Arrays.asList("14795045", "4562589"));
 
 		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 300", "jardin", "38220834", cl1, c1);
 		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cl1, c2);
+		Endereco e3 = new Endereco(null, "Avenida Floriano", "210", null, "Centro", "74577012", cl2, c2);
 
+		
 		cl1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		cl2.getEnderecos().addAll(Arrays.asList(e3));
 
-		clienteRepository.saveAll(Arrays.asList(cl1));
+		clienteRepository.saveAll(Arrays.asList(cl1, cl2));
 
-		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
 
 		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 

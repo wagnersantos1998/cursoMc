@@ -21,6 +21,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
@@ -58,7 +63,6 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-<<<<<<< HEAD
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
@@ -72,12 +76,7 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.7.0</version>
 		</dependency>
-		
-=======
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
 
->>>>>>> 4360cf24830cf2fd53d417672651ffd7973d2c1f
 	</dependencies>
 	<build>
 		<plugins>
