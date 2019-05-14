@@ -20,6 +20,8 @@ import com.wagnersantos.cursomc.dto.ClienteDTO;
 import com.wagnersantos.cursomc.dto.NovoClienteDTO;
 import com.wagnersantos.cursomc.repositories.ClienteRepository;
 import com.wagnersantos.cursomc.repositories.EnderecoRepository;
+import com.wagnersantos.cursomc.security.UsuarioSS;
+import com.wagnersantos.cursomc.services.excecoes.ExcecaoAutorizacao;
 import com.wagnersantos.cursomc.services.excecoes.ObjetoNaoEncontrado;
 
 @Service
@@ -35,6 +37,14 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepository;
 
 	public Cliente buscarClienteId(Integer id) {
+
+		UsuarioSS usuario = UserService.authenticatador();
+		if (usuario == null || !id.equals(usuario.getId())) {
+			throw new ExcecaoAutorizacao("Acesso negado");
+		}
+		//|| !usuario.hasRole(Perfil.ADMIN) && id.equals(usuario.getId()
+		//na regra de negocio do curso usa essa condicao acima no projeto foi alterado 
+		
 		Optional<Cliente> objCli = repo.findById(id);
 		return objCli.orElseThrow(() -> new ObjetoNaoEncontrado(
 				"Objeto não encontrado! id:" + id + ", tipo: " + Cliente.class.getName()));

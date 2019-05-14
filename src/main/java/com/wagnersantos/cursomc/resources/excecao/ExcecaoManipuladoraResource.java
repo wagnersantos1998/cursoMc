@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.wagnersantos.cursomc.services.excecoes.ExcecaoAutorizacao;
 import com.wagnersantos.cursomc.services.excecoes.ExcecaoIntegridadeDados;
 import com.wagnersantos.cursomc.services.excecoes.ObjetoNaoEncontrado;
 
@@ -39,4 +40,10 @@ public class ExcecaoManipuladoraResource {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
 	}
 
+	@ExceptionHandler(ExcecaoAutorizacao.class)
+	public ResponseEntity<ErroPadrao> Autorizacao(ExcecaoAutorizacao e, HttpServletRequest request) {
+		ErroPadrao erro = new ErroPadrao(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(erro);
+	}
+	
 }
