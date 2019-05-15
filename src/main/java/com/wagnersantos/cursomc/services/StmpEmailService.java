@@ -19,4 +19,5 @@ public class StmpEmailService extends AbstractMailService {
 		enviarEmail.send(msgm);
 	}
 
+	
 }
