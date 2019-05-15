@@ -138,7 +138,7 @@ public class DBService {
 		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
 		Pedido ped1 = new Pedido(null, data.parse("30/09/2017 10:32"), cl1, e1);
-		Pedido ped2 = new Pedido(null, data.parse("10/10/2017 19:35"), cl1, e2);
+		Pedido ped2 = new Pedido(null, data.parse("10/10/2017 19:35"), cl2, e2);
 
 		Pagamento pgto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
 		ped1.setPagamento(pgto1);
@@ -147,7 +147,8 @@ public class DBService {
 				null);
 		ped2.setPagamento(pgto2);
 
-		cl1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		cl1.getPedidos().addAll(Arrays.asList(ped1));
+		cl2.getPedidos().addAll(Arrays.asList(ped2));
 
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pgto1, pgto2));
